@@ -45,7 +45,7 @@ SELECT * FROM user WHERE id = ?;
 ---
 
 ### N+1 문제 발생 원인
-`N+1`문제는 `JPA`의 **지연 로딩(Lazy Loading)**과 연관 관계 처리 방식 때문에 발생한다.
+`N+1`문제는 `JPA`의 **지연 로딩(Lazy Loading)** 과 연관 관계 처리 방식 때문에 발생한다.
 - @ManyToOne(fetch = FetchType.LAZY)
 - @OneToMany(fetch = FetchType.LAZY)
 
@@ -94,7 +94,7 @@ spring:
 ## 2. 트랜잭션 격리성(Isolation)과 격리 수준
 
 ### Isolation이란?
-트랜잭션의 `ACID` 속성 중 **격리성(Isolation)**은 
+트랜잭션의 `ACID` 속성 중 **격리성(Isolation)** 은 
 여러 트랜잭션이 동시에 실행될 때 서로 영향을 주지 않도록 하는 성질이다.
 
 즉, 하나의 트랜잭션이 수행 중일 때 다른 트랜잭션이 중간 상태를 볼 수 없게 보장하는 것이다.
