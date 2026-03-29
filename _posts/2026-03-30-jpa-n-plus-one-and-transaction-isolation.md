@@ -41,15 +41,17 @@ SELECT * FROM user WHERE id = ?;
 처음 1번 조회 + 각 데이터마다 추가 조회 N번이 발생하며,
 총 `N+1`번 쿼리가 발생하게 된다.
 
+---
 ### N+1 문제 발생 원인
 `N+1` 문제는 `JPA`의 **지연 로딩(Lazy Loading)**과 연관 관계 처리 방식 때문에 발생한다.
-  - @ManyToOne(fetch = FetchType.LAZY)
-  - @OneToMany(fetch = FetchType.LAZY)
+- @ManyToOne(fetch = FetchType.LAZY)
+- @OneToMany(fetch = FetchType.LAZY)
 
 연관 엔티티는 실제로 접근하는 시점에 조회되기 때문에, 루프를 돌면서 접근하면 쿼리가 반복 실행된다.
 
 또한 `EAGER` 전략을 사용하더라도 내부적으로 쿼리가 분리될 수 있어 `N+1` 문제가 발생할 수 있다.
 
+---
 ### N+1 문제 해결 방법
 
 #### 1. Fetch Join 사용
@@ -85,7 +87,6 @@ spring:
 `N+1` 문제는 `JPA`의 지연 로딩으로 인해 발생하며, 위의 제시된 방법들을 통해 해결할 수 있다.
 
 ---
-
 ## 2. 트랜잭션 격리성(Isolation)과 격리 수준
 
 ### Isolation이란?
@@ -105,6 +106,7 @@ spring:
 #### 3. Phantom Read
 - 같은 조건으로 조회했는데 결과 행이 달라지는 문제
 
+---
 ### 트랜잭션 격리 수준(Level)
 
 #### 1. READ UNCOMMITTED
@@ -128,6 +130,7 @@ spring:
 ### 정리
 격리 수준이 높을수록 데이터 정합성은 높아지지만, 동시성 성능은 낮아진다.
 
+---
 ## 마무리
 `JPA`의 `N+1` 문제와 트랜잭션 격리성은 각각 **성능**과 **데이터 정합성**을 대표하는 개념이다.
 효율적인 데이터 접근을 위해서는 쿼리 실행 방식(N+1)을 이해해야 하고,
